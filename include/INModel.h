@@ -81,7 +81,8 @@ double INModel<T, D>::perturb(InfoNest::RNG& rng)
     return logH;
 }
 
-
+// Satisfies clang
+std::ostream& operator << (std::ostream& out, const std::vector<double>& ys);
 
 template <typename T, typename D>
 void INModel<T, D>::print(std::ostream& out) const

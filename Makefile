@@ -1,4 +1,4 @@
-CXX = g++   # Only g++ will work because I used a special feature
+CXX = g++
 FLAGS = -std=c++17 -O3 -march=native -DNDEBUG -Wall -Wextra -pedantic -I include
 
 default:

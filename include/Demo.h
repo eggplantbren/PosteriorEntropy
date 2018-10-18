@@ -172,8 +172,7 @@ std::ostream& operator << (std::ostream& out,
     return out;
 }
 
-std::ostream& operator << (std::ostream& out,
-                                          const std::vector<double>& ys)
+std::ostream& operator << (std::ostream& out, const std::vector<double>& ys)
 {
     for(size_t i=0; i<ys.size(); ++i)
         out << ys[i] << ' ';

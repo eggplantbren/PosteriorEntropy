@@ -12,8 +12,6 @@ First, clone the repository recursively:
 
 Then compile the C++.
 
-**Note: I used a feature that only the GNU C++ compiler seems to support. I can fix this later if users want to use Clang or something else:**
-
 `make`
 
 Run the executable:
