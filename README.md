@@ -1,7 +1,10 @@
 PosteriorEntropy
 ================
 
-(c) 2018 Brendon J. Brewer and others. LICENCE: MIT.
+This is an interface to [InfoNest](https://github.com/eggplantbren/InfoNest]
+that simplifies the process of calculating H(theta | data).
+
+(c) 2018 Brendon J. Brewer. LICENCE: MIT.
 
 Usage
 =====
