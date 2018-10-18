@@ -11,6 +11,8 @@ namespace TransitInfo
 // The following must be implemented:
 //      void T::from_prior(InfoNest::RNG&)
 //      D    T::simulate_data(InfoNest::RNG&) const
+//      double T::log_likelihood(const D&) const
+//      std::ostream& operator << (std::ostream&, const T&)
 template <typename T, typename D>
 class Planet
 {
