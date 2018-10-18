@@ -6,7 +6,7 @@ using namespace TransitInfo;
 
 int main()
 {
-    RNG rng;
+    RNG rng(time(0));
     Demo params;
     params.from_prior(rng);
     auto data = params.simulate_data(rng);
