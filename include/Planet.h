@@ -8,11 +8,15 @@ namespace TransitInfo
 
 // T is planet parameterisation
 // D is data type (e.g. std::vector<double>)
+
 // The following must be implemented:
+
 //      void T::from_prior(InfoNest::RNG&)
 //      D    T::simulate_data(InfoNest::RNG&) const
 //      double T::log_likelihood(const D&) const
+//      double T::perturb(InfoNest::RNG&)
 //      std::ostream& operator << (std::ostream&, const T&)
+//      std::ostream& operator << (std::ostream&, const D&)
 template <typename T, typename D>
 class Planet
 {
@@ -21,6 +25,9 @@ class Planet
         // A point in the joint space.
         T params;
         D data;
+
+        // Log likelihood
+        double logL;
 
     public:
 
@@ -58,8 +65,28 @@ void Planet<T, D>::generate(InfoNest::RNG& rng)
 {
     params.from_prior(rng);
     data = params.simulate_data(rng);
+    logL = params.log_likelihood(data);
 }
 
+template <typename T, typename D>
+double Planet<T, D>::perturb(InfoNest::RNG& rng)
+{
+    double logH = -logL;
+
+    logH += params.perturb(rng);
+    logL = params.log_likelihood(data);
+    logH += logL;
+
+    return logH;
+}
+
+
+
+template <typename T, typename D>
+void Planet<T, D>::print(std::ostream& out) const
+{
+    out << params << ' ' << data;
+}
 
 } // namespace
 

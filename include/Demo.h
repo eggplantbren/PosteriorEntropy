@@ -4,6 +4,7 @@
 #include <ostream>
 #include "Options.h"
 #include "InfoNest/cpp/RNG.h"
+#include "InfoNest/cpp/Utils.h"
 
 namespace TransitInfo
 {
@@ -27,6 +28,7 @@ class Demo
 
         Demo();
         void from_prior(InfoNest::RNG& rng);
+        double perturb(InfoNest::RNG& rng);
         std::vector<double> simulate_data(InfoNest::RNG& rng) const;
         double log_likelihood(const std::vector<double>& ys) const;
         friend std::ostream& operator << (std::ostream& out,
@@ -58,6 +60,47 @@ void Demo::from_prior(InfoNest::RNG& rng)
 
     // Compute noise-free curve
     compute_mus();
+}
+
+double Demo::perturb(InfoNest::RNG& rng)
+{
+    double logH = 0.0;
+    int which = rng.rand_int(4);
+
+    if(which == 0)
+    {
+        tc += t_range*rng.randh();
+        InfoNest::wrap(tc, t_min, t_max);
+    }
+    else if(which == 1)
+    {
+        depth = 1.0 - exp(-depth/0.1);
+        depth += rng.randh();
+        InfoNest::wrap(depth, 0.0, 1.0);
+        depth = -0.1*log(1.0 - depth);
+    }
+    else if(which == 2)
+    {
+        width = log(width);
+        logH -= -0.5*pow(width - log(0.01), 2);
+        width += rng.randh();
+        logH += -0.5*pow(width - log(0.01), 2);
+        width = exp(width);
+    }
+    else if(which == 3)
+    {
+        sigma = log(sigma);
+        logH -= -0.5*pow(sigma - log(0.01), 2);
+        sigma += rng.randh();
+        logH += -0.5*pow(sigma - log(0.01), 2);
+        sigma = exp(sigma);
+    }
+
+    // Compute noise-free curve
+    if(which != 3)
+        compute_mus();
+
+    return logH;
 }
 
 void Demo::compute_mus()
