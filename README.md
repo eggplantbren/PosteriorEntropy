@@ -8,7 +8,7 @@ Usage
 
 First, clone the repository recursively:
 
-`git clone --recursive https://github.com/eggplantbren/PlanetInfo`
+`git clone --recursive https://github.com/eggplantbren/PosteriorEntropy`
 
 Then compile the C++.
 
