@@ -8,6 +8,9 @@ namespace TransitInfo
 
 // T is planet parameterisation
 // D is data type (e.g. std::vector<double>)
+// The following must be implemented:
+//      void T::from_prior(InfoNest::RNG&)
+//      D    T::simulate_data(InfoNest::RNG&) const
 template <typename T, typename D>
 class Planet
 {
