@@ -1,9 +1,9 @@
-#ifndef TransitInfo_INModel_h
-#define TransitInfo_INModel_h
+#ifndef PosteriorEntropy_INModel_h
+#define PosteriorEntropy_INModel_h
 
 #include "InfoNest/cpp/RNG.h"
 
-namespace TransitInfo
+namespace PosteriorEntropy
 {
 
 // T is planet parameterisation

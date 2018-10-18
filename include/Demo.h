@@ -1,17 +1,28 @@
-#ifndef TransitInfo_Demo_h
-#define TransitInfo_Demo_h
+#ifndef PosteriorEntropy_Demo_h
+#define PosteriorEntropy_Demo_h
 
 #include <ostream>
 #include "Options.h"
 #include "InfoNest/cpp/RNG.h"
 #include "InfoNest/cpp/Utils.h"
 
-namespace TransitInfo
+namespace PosteriorEntropy
 {
 
 // A simple demo planet model specification.
 class Demo
 {
+    private:
+
+        // Number of data points
+        static constexpr size_t N = 101;
+
+        // Time range of data points
+        static constexpr double t_min = 0.0;
+        static constexpr double t_max = 1.0;
+        static constexpr double t_range = t_max - t_min;
+        static constexpr double dt = t_range/(N - 1);
+
     private:
 
         // Just parameterise centre time, depth and width of the transit.

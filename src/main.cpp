@@ -4,7 +4,7 @@
 #include "InfoNest/cpp/Execute.hpp"
 
 using namespace InfoNest;
-using namespace TransitInfo;
+using namespace PosteriorEntropy;
 
 int main()
 {
