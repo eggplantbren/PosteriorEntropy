@@ -1,8 +1,7 @@
-#ifndef PosteriorEntropy_Demo_h
-#define PosteriorEntropy_Demo_h
+#ifndef PosteriorEntropy_TransitDemo_h
+#define PosteriorEntropy_TransitDemo_h
 
 #include <ostream>
-#include "Options.h"
 #include "InfoNest/cpp/RNG.h"
 #include "InfoNest/cpp/Utils.h"
 
@@ -10,7 +9,7 @@ namespace PosteriorEntropy
 {
 
 // A simple demo planet model specification.
-class Demo
+class TransitDemo
 {
     private:
 
@@ -37,26 +36,26 @@ class Demo
 
     public:
 
-        Demo();
+        TransitDemo();
         void from_prior(InfoNest::RNG& rng);
         double perturb(InfoNest::RNG& rng);
         std::vector<double> simulate_data(InfoNest::RNG& rng) const;
         double log_likelihood(const std::vector<double>& ys) const;
         friend std::ostream& operator << (std::ostream& out,
-                                          const Demo& demo);
-        friend double distance(const Demo& x, const Demo& y);
+                                          const TransitDemo& demo);
+        friend double distance(const TransitDemo& x, const TransitDemo& y);
 };
 
 
 /****************** IMPLEMENTATION FOLLOWS ********************/
 
-Demo::Demo()
+TransitDemo::TransitDemo()
 :mus(N)
 {
 
 }
 
-void Demo::from_prior(InfoNest::RNG& rng)
+void TransitDemo::from_prior(InfoNest::RNG& rng)
 {
     // Uniform(t_min, t_max)
     tc = t_min + t_range*rng.rand();
@@ -74,7 +73,7 @@ void Demo::from_prior(InfoNest::RNG& rng)
     compute_mus();
 }
 
-double Demo::perturb(InfoNest::RNG& rng)
+double TransitDemo::perturb(InfoNest::RNG& rng)
 {
     double logH = 0.0;
     int which = rng.rand_int(4);
@@ -115,7 +114,7 @@ double Demo::perturb(InfoNest::RNG& rng)
     return logH;
 }
 
-void Demo::compute_mus()
+void TransitDemo::compute_mus()
 {
     // Beginning and end of transit
     double t_start = tc - 0.5*width;
@@ -135,7 +134,7 @@ void Demo::compute_mus()
 }
 
 
-std::vector<double> Demo::simulate_data(InfoNest::RNG& rng) const
+std::vector<double> TransitDemo::simulate_data(InfoNest::RNG& rng) const
 {
     std::vector<double> ys(N);
 
@@ -162,7 +161,7 @@ std::vector<double> Demo::simulate_data(InfoNest::RNG& rng) const
 }
 
 
-double Demo::log_likelihood(const std::vector<double>& ys) const
+double TransitDemo::log_likelihood(const std::vector<double>& ys) const
 {
     double var = sigma*sigma;
     double tau = 1.0/var;
@@ -176,7 +175,7 @@ double Demo::log_likelihood(const std::vector<double>& ys) const
 }
 
 std::ostream& operator << (std::ostream& out,
-                                          const Demo& demo)
+                                          const TransitDemo& demo)
 {
     out << demo.tc << ' ' << demo.depth << ' ';
     out << demo.width << ' ' << demo.sigma;
@@ -190,7 +189,7 @@ std::ostream& operator << (std::ostream& out, const std::vector<double>& ys)
     return out;
 }
 
-double distance(const Demo& x, const Demo& y)
+double distance(const TransitDemo& x, const TransitDemo& y)
 {
     return std::abs(log(x.width) - log(y.width));
 }

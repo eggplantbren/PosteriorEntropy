@@ -1,6 +1,6 @@
 #include <iostream>
 #include "INModel.h"
-#include "Demo.h"
+#include "TransitDemo.h"
 #include "InfoNest/cpp/Execute.hpp"
 
 using namespace InfoNest;
@@ -9,7 +9,7 @@ using namespace PosteriorEntropy;
 int main()
 {
     // The InfoNest model
-    using TheModel = INModel<Demo, std::vector<double>>;
+    using TheModel = INModel<TransitDemo, std::vector<double>>;
 
     // Create random number generators
     // The first one is used to generate reference points
