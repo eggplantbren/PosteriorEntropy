@@ -1,2 +1,6 @@
 *.gch
 main
+latest_particles.txt
+output.txt
+run_data.txt
+reference_particles.txt
