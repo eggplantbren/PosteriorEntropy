@@ -138,23 +138,10 @@ std::vector<double> TransitDemo::simulate_data(InfoNest::RNG& rng) const
 {
     std::vector<double> ys(N);
 
-    // Beginning and end of transit
-    double t_start = tc - 0.5*width;
-    double t_end   = tc + 0.5*width;
-
-    double t;
     for(size_t i=0; i<N; ++i)
     {
-        // Timestamp of the data point
-        t = t_min + i*dt;
-
-        if(t > t_start && t < t_end)
-            ys[i] = -depth;
-        else
-            ys[i] = 0.0;
-
         // Add the noise
-        ys[i] += sigma*rng.randn();
+        ys[i] = mus[i] + sigma*rng.randn();
     }
 
     return ys;
