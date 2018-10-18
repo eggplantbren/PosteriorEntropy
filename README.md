@@ -10,7 +10,9 @@ First, clone the repository recursively:
 
 `git clone --recursive https://github.com/eggplantbren/PlanetInfo`
 
-Compile the C++:
+Then compile the C++.
+
+**Note: I used a feature that only the GNU C++ compiler seems to support. I can fix this later if users want to use Clang or something else:**
 
 `make`
 
