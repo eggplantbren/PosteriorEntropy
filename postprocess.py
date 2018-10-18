@@ -70,8 +70,9 @@ def postprocess(tol=1E-3):
 
 if __name__ == "__main__":
 
-    tol = 1E-3
+    tol = 1E-4
     result = postprocess(tol)
+    print("")
     print("# H(theta | data) = {H} +- {Hsem} nats"\
             .format(H=result["H"], Hsem=result["Hsem"]))
 

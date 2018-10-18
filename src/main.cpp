@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Planet.h"
+#include "INModel.h"
 #include "Demo.h"
 #include "InfoNest/cpp/Execute.hpp"
 
@@ -9,7 +9,7 @@ using namespace TransitInfo;
 int main()
 {
     // The InfoNest model
-    using INModel = Planet<Demo, std::vector<double>>;
+    using TheModel = INModel<Demo, std::vector<double>>;
 
     // Create random number generators
     // The first one is used to generate reference points
@@ -26,9 +26,9 @@ int main()
     constexpr size_t mcmc_steps    = 1000;
 
     // Do the run.
-    InfoNest::execute<INModel>(rng0, rng1, depth, num_reps, num_particles,
-                               mcmc_steps, INModel::parameter_distance,
-                               Mode::conditional_entropy, mcmc_steps);
+    InfoNest::execute<TheModel>(rng0, rng1, depth, num_reps, num_particles,
+                                mcmc_steps, TheModel::parameter_distance,
+                                Mode::conditional_entropy, mcmc_steps);
 
     return 0;
 }

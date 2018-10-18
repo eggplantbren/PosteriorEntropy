@@ -1,5 +1,5 @@
-#ifndef TransitInfo_Planet_h
-#define TransitInfo_Planet_h
+#ifndef TransitInfo_INModel_h
+#define TransitInfo_INModel_h
 
 #include "InfoNest/cpp/RNG.h"
 
@@ -19,7 +19,7 @@ namespace TransitInfo
 //      std::ostream& operator << (std::ostream&, const D&)
 //      double distance(const T&, const T&)
 template <typename T, typename D>
-class Planet
+class INModel
 {
     private:
 
@@ -32,7 +32,7 @@ class Planet
 
     public:
 
-        Planet();
+        INModel();
 
         // Generate from the distribution
         void generate(InfoNest::RNG& rng);
@@ -45,7 +45,7 @@ class Planet
 
         // Parameter distance function
         static double parameter_distance
-                            (const Planet& x, const Planet& y);
+                            (const INModel& x, const INModel& y);
 
 };
 
@@ -55,14 +55,14 @@ class Planet
 /****************** IMPLEMENTATION FOLLOWS ********************/
 
 template <typename T, typename D>
-Planet<T, D>::Planet()
+INModel<T, D>::INModel()
 {
 
 }
 
 
 template <typename T, typename D>
-void Planet<T, D>::generate(InfoNest::RNG& rng)
+void INModel<T, D>::generate(InfoNest::RNG& rng)
 {
     params.from_prior(rng);
     data = params.simulate_data(rng);
@@ -70,7 +70,7 @@ void Planet<T, D>::generate(InfoNest::RNG& rng)
 }
 
 template <typename T, typename D>
-double Planet<T, D>::perturb(InfoNest::RNG& rng)
+double INModel<T, D>::perturb(InfoNest::RNG& rng)
 {
     double logH = -logL;
 
@@ -84,14 +84,14 @@ double Planet<T, D>::perturb(InfoNest::RNG& rng)
 
 
 template <typename T, typename D>
-void Planet<T, D>::print(std::ostream& out) const
+void INModel<T, D>::print(std::ostream& out) const
 {
     out << params << ' ' << data;
 }
 
 template <typename T, typename D>
-double Planet<T, D>::parameter_distance
-                            (const Planet<T, D>& x, const Planet<T, D>& y)
+double INModel<T, D>::parameter_distance
+                            (const INModel<T, D>& x, const INModel<T, D>& y)
 {
     return distance(x.params, y.params);
 }
