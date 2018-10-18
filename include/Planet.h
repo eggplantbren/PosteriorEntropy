@@ -17,6 +17,7 @@ namespace TransitInfo
 //      double T::perturb(InfoNest::RNG&)
 //      std::ostream& operator << (std::ostream&, const T&)
 //      std::ostream& operator << (std::ostream&, const D&)
+//      double distance(const T&, const T&)
 template <typename T, typename D>
 class Planet
 {
@@ -92,7 +93,7 @@ template <typename T, typename D>
 double Planet<T, D>::parameter_distance
                             (const Planet<T, D>& x, const Planet<T, D>& y)
 {
-    return distance(x, y);
+    return distance(x.params, y.params);
 }
 
 } // namespace
