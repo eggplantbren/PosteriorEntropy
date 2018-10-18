@@ -88,6 +88,13 @@ void Planet<T, D>::print(std::ostream& out) const
     out << params << ' ' << data;
 }
 
+template <typename T, typename D>
+double Planet<T, D>::parameter_distance
+                            (const Planet<T, D>& x, const Planet<T, D>& y)
+{
+    return distance(x, y);
+}
+
 } // namespace
 
 

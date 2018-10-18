@@ -33,6 +33,7 @@ class Demo
         double log_likelihood(const std::vector<double>& ys) const;
         friend std::ostream& operator << (std::ostream& out,
                                           const Demo& demo);
+        friend double distance(const Demo& x, const Demo& y);
 };
 
 
@@ -179,6 +180,10 @@ std::ostream& operator << (std::ostream& out,
     return out;
 }
 
+double distance(const Demo& x, const Demo& y)
+{
+    return std::abs(log(x.width) - log(y.width));
+}
 
 
 } // namespace
