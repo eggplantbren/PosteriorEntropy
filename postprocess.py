@@ -64,8 +64,14 @@ def postprocess(tol=1E-3):
 
     if np.any(counts == rep_lengths):
         print("# WARNING: A run didn't achieve the desired tolerance.")
+    return {"H": counts.mean()/num_particles + np.log(2*tol),
+            "Hsem": counts.std() / num_particles/np.sqrt(len(counts)) }
 
 
 if __name__ == "__main__":
-    postprocess(tol=1E-3)
+
+    tol = 1E-3
+    result = postprocess(tol)
+    print("# H(theta | data) = {H} +- {Hsem} nats"\
+            .format(H=result["H"], Hsem=result["Hsem"]))
 
